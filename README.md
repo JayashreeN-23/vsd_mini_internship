@@ -42,6 +42,9 @@ The request is cleared.
 The final message is printed indicating that the elevator has reached the target floor.
 This simple model effectively demonstrates the fundamental logic behind an elevator controller.
 
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/2a1f1fa9-99c7-40d6-8c14-e7a981e1adfd)
+
+
 1.I started by opening Terminal and creating and opening a new C file in Leafpad and named it as smart_elevator.c , I wrote the code in it as the below image,
 ![Screenshot 2024-06-25 150957](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/b6f73d91-8752-40c4-8a42-53364e64534e)
 ![Screenshot 2024-06-25 151010](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/45c243ca-b4e6-46d5-80df-b521e60d04a6)
