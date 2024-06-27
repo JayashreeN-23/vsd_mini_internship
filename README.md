@@ -1,5 +1,8 @@
 # vsd_mini_internship
-# Task 1:  Using a RISC-V simulator, write a C program to count the sum of all numbers from 1 to n.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<details>
+
+<summary><h3>Task 1: </h3> Using a RISC-V simulator, write a C program to count the sum of all numbers from 1 to n.</summary>
 1. I have started with the installation of the oracle virtual box
 ![Virtual box installation](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/e0fd0241-6ee6-4037-9cc0-c1509c951068)
 2. Then I have installed ubuntu
