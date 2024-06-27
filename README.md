@@ -77,6 +77,75 @@ This simple model effectively demonstrates the fundamental logic behind an eleva
 </details>
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+<details>
+
+<summary><h3>Task 3: </h3> Do SPIKE Simulation and verification with -O1 and -Ofast along with running the RISC-V. </summary>
+
+In this task, we have to perform Spike Simulation and observe with (`-o1`) and (`-ofast`) command.
+
+####  Verification with `-o1` command :
+
+At first, we will verify the code for `-o1` , to do that, the output we got from the `gcc` command should be equal to the spike simulation.
+
+This command ` riscv64-unknown-elf-gcc -o1 -mabi=lp64 -march=rv64i -o smart_elevator.o smart_elevator.c ` will run the C code to give the output in C by using `./a.out` and for RISC-V processor we must use `spike pk smart_elevator`
+
+Hence, the verification for command `-o1` is done.
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/deea60dd-2fc9-4e66-8470-09008568eb9b)
+
+
+##### Debugging the RISC-V Processor for `-o1` using Spike simulation :
+
+Now we will debugg the assembly code instruction we got from from ` riscv64-unknown-elf-objdump -d vending_machine.o | less `
+
+![Screenshot 2024-06-27 125157](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/c864156f-35f3-445b-a07a-83a3bac345d4)
+
+In this, we will debugg by using the instruction `spike -d pk vending_machine` 
+which will allow us to spike any instruction we want.
+
+Now, we spike for the initial address we see on the assembly code `100b0` so that we can see starting address to any point manually by using program counter
+
+To do so, `until pc 0 100b0`, this means that it will debugg all the instruction after 100b0 and also shows the previous instructions to `100b0` is already being debugged. 
+
+Type for `reg 0 a2`, it will show the register value at zero core for a2 operand.
+To see next instruction, press `Enter` and it will show the starting address and if pressed again it will go to `100b4` which is the next instruction.
+
+`reg 0 sp` shows the stack pointer of the instruction of 100b4
+
+and if we want to see the next instruction(`100b8`) stack pointer just subtract the value we got from `reg 0 sp` of `100b4` from `16` as it is a hexadecimal value. It will give the `100b8` instruction stack pointer.
+We can verify it by using `until pc 0 100b8` the program counter poites at instruction `100b8`, before that quit from the previous operation by pressing `q`.
+
+Type `reg 0 sp`
+Hence it is verified and debugged now.
+
+##### Verification with `-ofast` :
+Step 1: C Code compilation using command ` riscv64-unknown-elf-gcc -ofast -mabi=lp64 -march=rv64i -o smart_elevator.o smart_elevator.c `.
+Check the output by running `gcc file_name` which is `gcc smart_elevator.c`
+The output can be verified by using `./a.out`
+
+Step 2: RISC-V Processor compilation is by using again ` riscv64-unknown-elf-gcc -ofast -mabi=lp64 -march=rv64i -o smart_elevator.o smart_elevator.c `.
+Check and verified the output by `spike pk smart_elevator.o`.
+
+- Note: If the ouput from Step 1 and Step 2 is matched, then the verification with `-ofast` is over.
+
+  ![Screenshot 2024-06-27 124540](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/ecf441a9-7e46-48d2-9d3d-3fd7718477ab)
+
+  ![Screenshot 2024-06-27 130806](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/30302a6d-5c4a-4745-b4a1-4c46fa559184)
+
+  **Task 3 completed**
+  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  </details>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
