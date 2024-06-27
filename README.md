@@ -13,10 +13,7 @@
 4. After that, it was compiled, run in the terminal to verify, and the desired output was obtained.
 ![output of the c program](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/f034395c-6198-48b2-aae6-eae609a3143e)
 
-<details>
-  
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Running the same program in the RISC-V Simulator
+**Running the same program in the RISC-V Simulator**
   
 After running the code in the terminal, I needed to run it in the RISC-V simulator. To do that, I was required to run a specific set of code, which I completed in the steps below:
 1. In order to produce a file with the ".o" extension(Assembled File), I first wrote the code to build it using the RISC-V gcc compiler with 'O1' as compiler option.Then the outuput will be,
@@ -28,12 +25,12 @@ After running the code in the terminal, I needed to run it in the RISC-V simulat
 5. After this I run the identical instructions with a different parameter, instead of O1, I used Ofast. I didn't observed any changes in the instructions.
 ![Fast instruction](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/64b037c5-8e0a-4db1-b439-51001dfbbc87)
 **Task 1 completed**
-
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</details>
 
 <details>
 
-<summary><h3>Task 2:</h3> Using a RISC-V simulator, write a C program for the smart elevator</summary>
+<summary><h3>Task 2: </h3> Using a RISC-V simulator, write a C program for the smart elevator</summary>
 
 **My project is to create the smart elevator controller.**
 Before writing the code first we should understand about "SMART ELEVATOR CONTROLLER" and how does it work. Once we understand how does it works we can develop the driver to run it very easily.
@@ -74,9 +71,8 @@ This simple model effectively demonstrates the fundamental logic behind an eleva
 ![Screenshot 2024-06-25 154420](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/88e5c4c7-3c12-4b23-9d4a-6a635e877221)
 
 **Task 2 completed**
-<details>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+</details>
 
 
 
