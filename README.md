@@ -25,10 +25,10 @@ After running the code in the terminal, I needed to run it in the RISC-V simulat
 5. After this I run the identical instructions with a different parameter, instead of O1, I used Ofast. I didn't observed any changes in the instructions.
 ![Fast instruction](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/64b037c5-8e0a-4db1-b439-51001dfbbc87)
 **Task 1 completed**
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 </details>
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 <details>
 
@@ -73,10 +73,10 @@ This simple model effectively demonstrates the fundamental logic behind an eleva
 ![Screenshot 2024-06-25 154420](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/88e5c4c7-3c12-4b23-9d4a-6a635e877221)
 
 **Task 2 completed**
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 </details>
 
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 <details>
 
 <summary><h3>Task 3: </h3> Do SPIKE Simulation and verification with -O1 and -Ofast along with running the RISC-V. </summary>
@@ -133,8 +133,196 @@ Check and verified the output by `spike pk smart_elevator.o`.
   ![Screenshot 2024-06-27 130806](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/30302a6d-5c4a-4745-b4a1-4c46fa559184)
 
   **Task 3 completed**
-  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  
   </details>
+
+  <details>
+
+<summary><h3>Task 4: </h3>Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32-bit instruction code in the instruction type format for below RISC-V instructions. </summary>
+
+To identify the 32-bit instruction code for each RISC-V instruction, we need to understand the format for each type of instruction: R, I, S, B, U, and J.
+
+Here are the formats:
+
+### R-Type Format
+- *Opcode:* 7 bits
+- *rd:* 5 bits (destination register)
+- *funct3:* 3 bits
+- *rs1:* 5 bits (source register 1)
+- *rs2:* 5 bits (source register 2)
+- *funct7:* 7 bits
+
+### I-Type Format
+- *Opcode:* 7 bits
+- *rd:* 5 bits (destination register)
+- *funct3:* 3 bits
+- *rs1:* 5 bits (source register 1)
+- *imm:* 12 bits (immediate value)
+
+### S-Type Format
+- *Opcode:* 7 bits
+- *imm[4:0]:* 5 bits (immediate value)
+- *funct3:* 3 bits
+- *rs1:* 5 bits (source register 1)
+- *rs2:* 5 bits (source register 2)
+- *imm[11:5]:* 7 bits (immediate value)
+
+### B-Type Format
+- *Opcode:* 7 bits
+- *imm[11]:* 1 bit (immediate value)
+- *imm[4:1]:* 4 bits (immediate value)
+- *funct3:* 3 bits
+- *rs1:* 5 bits (source register 1)
+- *rs2:* 5 bits (source register 2)
+- *imm[10:5]:* 6 bits (immediate value)
+- *imm[12]:* 1 bit (immediate value)
+
+### U-Type Format
+- *Opcode:* 7 bits
+- *rd:* 5 bits (destination register)
+- *imm[31:12]:* 20 bits (immediate value)
+
+### J-Type Format
+- *Opcode:* 7 bits
+- *rd:* 5 bits (destination register)
+- *imm[19:12]:* 8 bits (immediate value)
+- *imm[11]:* 1 bit (immediate value)
+- *imm[10:1]:* 10 bits (immediate value)
+- *imm[20]:* 1 bit (immediate value)
+
+Now, let's write the 32-bit instruction codes for each instruction:
+
+### R-Type Instructions
+- *ADD r1, r2, r3*
+  - *funct7*: 0000000
+  - *rs2*: r3 (0011)
+  - *rs1*: r2 (0010)
+  - *funct3*: 000
+  - *rd*: r1 (0001)
+  - *opcode*: 0110011
+
+  *Binary:* 0000000 0011 0010 000 0001 0110011
+  *Hex:* 0x00208133
+
+- *SUB r3, r1, r2*
+  - *funct7*: 0100000
+  - *rs2*: r2 (0010)
+  - *rs1*: r1 (0001)
+  - *funct3*: 000
+  - *rd*: r3 (0011)
+  - *opcode*: 0110011
+
+  *Binary:* 0100000 0010 0001 000 0011 0110011
+  *Hex:* 0x40210133
+
+- *AND r2, r1, r3*
+  - *funct7*: 0000000
+  - *rs2*: r3 (0011)
+  - *rs1*: r1 (0001)
+  - *funct3*: 111
+  - *rd*: r2 (0010)
+  - *opcode*: 0110011
+
+  *Binary:* 0000000 0011 0001 111 0010 0110011
+  *Hex:* 0x00317133
+
+- *OR r8, r2, r5*
+  - *funct7*: 0000000
+  - *rs2*: r5 (0101)
+  - *rs1*: r2 (0010)
+  - *funct3*: 110
+  - *rd*: r8 (1000)
+  - *opcode*: 0110011
+
+  *Binary:* 0000000 0101 0010 110 1000 0110011
+  *Hex:* 0x0050A233
+
+- *XOR r8, r1, r4*
+  - *funct7*: 0000000
+  - *rs2*: r4 (0100)
+  - *rs1*: r1 (0001)
+  - *funct3*: 100
+  - *rd*: r8 (1000)
+  - *opcode*: 0110011
+
+  *Binary:* 0000000 0100 0001 100 1000 0110011
+  *Hex:* 0x0040A233
+
+- *SLT r10, r2, r4*
+  - *funct7*: 0000000
+  - *rs2*: r4 (0100)
+  - *rs1*: r2 (0010)
+  - *funct3*: 010
+  - *rd*: r10 (1010)
+  - *opcode*: 0110011
+
+  *Binary:* 0000000 0100 0010 010 1010 0110011
+  *Hex:* 0x004152B3
+
+### I-Type Instructions
+- *ADDI r12, r3, 5*
+  - *imm*: 000000000101
+  - *rs1*: r3 (0011)
+  - *funct3*: 000
+  - *rd*: r12 (1100)
+  - *opcode*: 0010011
+
+  *Binary:* 000000000101 0011 000 1100 0010011
+  *Hex:* 0x00518193
+
+- *LW r13, r11, 2*
+  - *imm*: 000000000010
+  - *rs1*: r11 (1011)
+  - *funct3*: 010
+  - *rd*: r13 (1101)
+  - *opcode*: 0000011
+
+  *Binary:* 000000000010 1011 010 1101 0000011
+  *Hex:* 0x0025A293
+
+### S-Type Instructions
+- *SW r3, r1, 4*
+  - *imm*: 000000000100
+  - *rs1*: r1 (0001)
+  - *rs2*: r3 (0011)
+  - *funct3*: 010
+  - *opcode*: 0100011
+
+  *Binary:* 0000000 0011 0001 010 0010 0011 0010
+  *Hex:* 0x00412023
+
+### B-Type Instructions
+- *BNE r0, r1, 20*
+  - *imm*: 000000001010
+  - *rs1*: r0 (0000)
+  - *rs2*: r1 (0001)
+  - *funct3*: 001
+  - *opcode*: 1100011
+
+  *Binary:* 000000 1 00001 0000 001 0 0100 000 1100011
+  *Hex:* 0x01408063
+
+- *BEQ r0, r0, 15*
+  - *imm*: 000000000111
+  - *rs1*: r0 (0000)
+  - *rs2*: r0 (0000)
+  - *funct3*: 000
+  - *opcode*: 1100011
+
+  *Binary:* 000000 0 00000 0000 000 1 1110 000 1100011
+  *Hex:* 0x01E08063
+
+### U-Type Instructions
+- None in this list
+
+### J-Type Instructions
+- None in this list
+
+</details>
+
+
+
+  
 
 
 
