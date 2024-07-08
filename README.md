@@ -28,6 +28,8 @@ After running the code in the terminal, I needed to run it in the RISC-V simulat
 
 </details>
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 <details>
@@ -75,6 +77,8 @@ This simple model effectively demonstrates the fundamental logic behind an eleva
 **Task 2 completed**
 
 </details>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 <details>
@@ -136,7 +140,9 @@ Check and verified the output by `spike pk smart_elevator.o`.
   
   </details>
 
-  <details>
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<details>
 
 <summary><h3>Task 4: </h3>Identify various RISC-V instruction type (R, I, S, B, U, J) and exact 32-bit instruction code in the instruction type format for below RISC-V instructions. </summary>
 
@@ -318,11 +324,123 @@ Now, let's write the 32-bit instruction codes for each instruction:
 ### J-Type Instructions
 - None in this list
 
+**Task 4 completed**
+
 </details>
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+<details>
+
+<summary><h3>Task 5:</h3>Using RISC-V Core Verilog netlist and testbench for functional simulation experiment.In this we need to find the output waveforms for the instructions which we learnt in Task 4.</summary>
+
+Follow the steps to obtain the waveform for the instructions used in Task 4.
+
+> The Verilog Code and Testbench used is refered by https://github.com/vinayrayapati/rv32i/
+
+1.Firstly give the command: 
+```
+                            sudo apt-get update
+                            sudo apt-get install iverilog gtkwave
+```
+2.etup Your Project Directory Create a directory for your project and place your Verilog files and testbench there. 
+```
+                   mkdir rv 
+                   cd rv 
+```                              
+3. Copy the code from the reference code and paste it in a file name under `rv_riscv32.v` and `rv_riscvtb.v`
+
+4. Give command line as `touch rv_riscv32.v` and  `touch rv_riscvtb.v`  in leafpad
+   
+5. Run and simulate the verilog code by using the below command;
+
+```
+                                 iverilog -o rv_riscv32 rv_riscv32.v rv_riscvtb.v
+                                ./rv_riscv32
+```
+
+6.View the Waveform Open the waveform file using GTKWave:
+```
+                                 gtkwave iiitb_rv32i.vcd
+
+```
+7.Then GTKWave will open 
+![b8myq9jp](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/29e685c2-679e-46d8-8c5b-d799cfa23412)
+
+![WhatsApp Image 2024-07-08 at 17 21 07_ce3a29ac](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/d44df211-92dc-4a4a-b23c-319e8780d100)
+
+8.Now, drag the command in the same way presented under ` time ` section.
+
+Select the instructions from EX_MEM_IR[31:0] to present the instructions used in Task 4.
+
+**Instruction ADD r1, r2, r3 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/f84ef554-6925-461a-961a-b05ee1165f4f)
+
+**Instruction SUB r3, r1, r2 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/2554116f-8cfb-46f1-b95a-1744f4c6937c)
+
+**Instruction AND r2, r1, r3 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/63ca2759-c8cd-4c77-91cc-3e2bd4df667d)
+
+**Instruction OR r8, r2, r5 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/8a4f50b8-58a0-4429-b6cd-61e0cceee3f2)
+
+**Instruction XOR r8, r1, r4 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/04cf7b43-6288-4aca-afe9-6ff9fdd06f76)
+
+**Instruction SLT r10, r2, r4 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/637b73c5-87a5-4a29-8e42-c0c57e0581e8)
+
+**Instruction ADDI r12, r3, 5 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/51acecc9-3ecd-41a9-a6bd-6d9cb05a6640)
+
+**Instruction SW r3, r1, 4 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/f1dd8936-8675-4515-9077-32bb3974c390)
+
+**Instruction SRL r16, r11, r2 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/6c233374-0dc8-4809-a481-f55ff3b3e11f)
+
+**Instruction BNE r0, r1, 20 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/9ff296ce-a643-4e9a-9da7-2e59263abb94)
+
+**Instruction SLL r15, r11, r2 :**
+
+![image](https://github.com/JayashreeN-23/vsd_mini_internship/assets/173695325/eb5935ed-3c8c-4428-ad2e-ba764ac563fe)
+
+**Task 5 completed**
+
+</details>
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                              
 
 
 
