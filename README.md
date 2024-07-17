@@ -428,209 +428,214 @@ Select the instructions from EX_MEM_IR[31:0] to present the instructions used in
 
 # Smart Elevator Controller Using VSDsquadron Mini
 ## Overview
+Sure! Here’s a simplified version of the smart elevator project using a 16x2 LCD with an I2C interface, a 4x4 keypad, push buttons, and the VSDsquadron Mini board.
 
-This project involves designing and building a smart elevator controller using the VSDsquadron Mini board. The objective is to optimize elevator operations, enhance safety, improve user experience, and reduce energy consumption. The controller will manage the elevator's movement, door operations, and respond to call buttons using an embedded system with various sensors and actuators.
+### Components Required
+1. *VSDsquadron Mini board*
+2. *16x2 LCD Display with I2C Module*
+3. *4x4 Keypad*
+4. *Breadboard and Jumper Wires*
+5. *USB Cable for Power and Data*
 
-## Components Required
+### Pin Connections
+#### LCD with I2C Connections
+- *VCC*: Connect to +5V
+- *GND*: Connect to GND
+- *SDA*: Connect to I2C SDA pin (e.g., GPIO PC1)
+- *SCL*: Connect to I2C SCL pin (e.g., GPIO PC2)
 
-1. *VSDsquadron Mini Board*: The central processing unit for controlling the elevator.
-2. *Power Supply*: To power the VSDsquadron Mini and other components.
-3. *Motors*: Typically, stepper or servo motors for moving the elevator cabin.
-4. *Motor Drivers*: To interface between the VSDsquadron Mini and the motors.
-5. *Sensors*: 
-   - *Limit Switches*: For detecting the top and bottom positions.
-   - *Floor Sensors*: For detecting the floor levels.
-   - *Proximity Sensors*: For door operations.
-   - *Weight Sensors*: To ensure the cabin isn't overloaded.
-6. *Buttons*: For user input (call buttons, floor selection buttons inside the cabin).
-7. *Display*: To show the current floor and direction.
-8. *LEDs/Buzzers*: For indicating status and alerts.
-9. *Wires and Connectors*: For electrical connections.
-10. *Mechanical Components*: Pulleys, cables, and the elevator cabin.
+#### Keypad Connections
+- *Row Pins (R1-R4)*: Connect to GPIO pins D0, D1, D2, D3
+- *Column Pins (C1-C4)*: Connect to GPIO pins D4, D5, D6, D7
 
-## Circuit Connection
 
-1. *Power Supply*: Connect the power supply to the VSDsquadron Mini board's power input.
-2. *Motor Connections*:
-   - Connect the motor drivers to the VSDsquadron Mini.
-   - Connect the motors to the motor drivers.
-3. *Sensor Connections*:
-   - Connect limit switches, floor sensors, and proximity sensors to the appropriate input pins on the VSDsquadron Mini.
-4. *Button Connections*:
-   - Connect call buttons and floor selection buttons to the input pins on the VSDsquadron Mini.
-5. *Display and Indicators*:
-   - Connect the display to the VSDsquadron Mini’s output pins.
-   - Connect LEDs and buzzers to the output pins for status indications.
+### Simplified Process
 
-## Pinout Diagram and Table for Pin Connection
+1. *Connect the LCD*:
+   - *Power*: VCC to +5V, GND to GND
+   - *I2C Data*: SDA to PC1, SCL to PC2
 
-### Pinout Table
+2. *Connect the Keypad*:
+   - *Rows*: R1 to D0, R2 to D1, R3 to D2, R4 to D3
+   - *Columns*: C1 to D4, C2 to D5, C3 to D6, C4 to D7
 
-| Component            | VSDsquadron Mini Pin | Description              |
-|----------------------|----------------------|--------------------------|
-| Power Supply         | VCC, GND             | Power input              |
-| Stepper Motor Driver | Pin 2, Pin 3         | Motor control signals    |
-| Limit Switch (Top)   | Pin 4                | Top position detection   |
-| Limit Switch (Bottom)| Pin 5                | Bottom position detection|
-| Floor Sensor (1)     | Pin 6                | Floor 1 detection        |
-| Floor Sensor (2)     | Pin 7                | Floor 2 detection        |
-| Call Button (1)      | Pin 8                | Call from floor 1        |
-| Call Button (2)      | Pin 9                | Call from floor 2        |
-| Door Proximity Sensor| Pin 10               | Door open/close detection|
-| Weight Sensor        | Pin A0 (Analog)      | Weight detection         |
-| Display (I2C)        | SDA, SCL             | I2C communication        |
-| LED Indicator        | Pin 11               | Status indicator         |
-| Buzzer               | Pin 12               | Alert sound              |
+3. *Power and Data Connection*:
+   - Connect the VSDsquadron Mini board to the computer using a USB cable for both power and data communication.
 
-### Pinout Diagram
+### Sample Code
 
-Here is a conceptual diagram (ASCII art for simplicity):
+Here’s a sample code to get you started. This code initializes the LCD, keypad. It will display the keypad input on the LCD.
+
 
 ```
-      +--------------------+
- VCC--|                    |--GND
-      |    VSDsquadron     |
-      |       Mini         |
-      |                    |
- Pin2 |--Motor Control--   |  Pin3
- Pin4 |--Limit Switch--    |  Pin5
- Pin6 |--Floor Sensor--    |  Pin7
- Pin8 |--Call Button---    |  Pin9
- Pin10|--Proximity Sensor  | 
- PinA0|--Weight Sensor--   |
- SDA  |--Display (SDA)--   |
- SCL  |--Display (SCL)--   |
- Pin11|--LED Indicator--   |
- Pin12|--Buzzer---------   |
-      +--------------------+
-```
+#include <debug.h>
+#include <ch32v00x.h>
+#include <ch32v00x_gpio.h>
 
-## Steps to Build
+// Define pin connections for the keypad
+#define KEYPAD_ROW1 GPIO_Pin_4
+#define KEYPAD_ROW2 GPIO_Pin_5
+#define KEYPAD_ROW3 GPIO_Pin_6
+#define KEYPAD_ROW4 GPIO_Pin_7
+#define KEYPAD_COL1 GPIO_Pin_0
+#define KEYPAD_COL2 GPIO_Pin_1
+#define KEYPAD_COL3 GPIO_Pin_2
+#define KEYPAD_COL4 GPIO_Pin_3
 
-1. *Assemble the Components*: Arrange the motors, sensors, buttons, display, and other components as per the elevator design.
-2. *Connect the Components*: Using wires, connect all the components to the VSDsquadron Mini as per the pinout table.
-3. *Power Up*: Connect the power supply to the VSDsquadron Mini.
-4. *Program the VSDsquadron Mini*: Write and upload the control software to the VSDsquadron Mini to handle the elevator operations.
-5. *Testing*: Test each component individually, and then the entire system to ensure everything works as expected.
-6. *Debug and Optimize*: Fix any issues and optimize the control logic for smooth operations.
+// I2C LCD Address
+#define LCD_ADDRESS 0x27
 
-## Software
-
-The software for controlling the elevator should be written in a programming language compatible with the VSDsquadron Mini board (typically C/C++). The main tasks of the software include:
-
-1. *Reading Sensor Data*: Continuously read data from the floor sensors, limit switches, weight sensor, and door proximity sensor.
-2. *Processing User Inputs*: Handle inputs from call buttons and floor selection buttons.
-3. *Controlling Motors*: Based on sensor data and user inputs, control the motors to move the elevator to the desired floor.
-4. *Managing Door Operations*: Open and close the doors using the proximity sensors.
-5. *Displaying Status*: Show the current floor and direction on the display.
-6. *Safety Checks*: Implement safety checks to ensure the elevator does not operate if it is overloaded or if the doors are not properly closed.
-
-## Program
-
-````
-#include <stdio.h>
-#include <stdbool.h>
-
-#define MAX_FLOORS 10
-
-typedef enum { UP, DOWN, IDLE } Direction;
-
-typedef struct {
-    int current_floor;
-    int target_floor;
-    Direction direction;
-    bool request;
-} Elevator;
-
-void initialize_elevator(Elevator *elevator) {
-    elevator->current_floor = 0;
-    elevator->target_floor = 0;
-    elevator->direction = IDLE;
-    elevator->request = false;
+void delay(uint32_t count) {
+    while (count--) {
+        __asm("nop");
+    }
 }
 
-void add_request(Elevator *elevator, int floor) {
-    if (floor >= 0 && floor < MAX_FLOORS) {
-        elevator->target_floor = floor;
-        elevator->request = true;
-        if (elevator->current_floor < floor) {
-            elevator->direction = UP;
-        } else if (elevator->current_floor > floor) {
-            elevator->direction = DOWN;
-        } else {
-            elevator->direction = IDLE;
-            elevator->request = false;
+void GPIO_Config(void) {
+    GPIO_InitTypeDef GPIO_InitStructure;
+
+    // Enable GPIO clocks
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+
+    // Configure keypad row pins as output
+    GPIO_InitStructure.GPIO_Pin = KEYPAD_ROW1 | KEYPAD_ROW2 | KEYPAD_ROW3 | KEYPAD_ROW4;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+    // Configure keypad column pins as input with pull-up resistors
+    GPIO_InitStructure.GPIO_Pin = KEYPAD_COL1 | KEYPAD_COL2 | KEYPAD_COL3 | KEYPAD_COL4;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_Init(GPIOA, &GPIO_InitStructure);
+}
+
+char readKeypad(void) {
+    // Scan keypad rows
+    for (int row = 0; row < 4; row++) {
+        GPIO_ResetBits(GPIOA, KEYPAD_ROW1 | KEYPAD_ROW2 | KEYPAD_ROW3 | KEYPAD_ROW4);
+        GPIO_SetBits(GPIOA, (KEYPAD_ROW1 << row));
+        delay(10000);
+
+        if (GPIO_ReadInputDataBit(GPIOA, KEYPAD_COL1) == Bit_RESET) return '1' + row * 4;
+        if (GPIO_ReadInputDataBit(GPIOA, KEYPAD_COL2) == Bit_RESET) return '2' + row * 4;
+        if (GPIO_ReadInputDataBit(GPIOA, KEYPAD_COL3) == Bit_RESET) return '3' + row * 4;
+        if (GPIO_ReadInputDataBit(GPIOA, KEYPAD_COL4) == Bit_RESET) return '4' + row * 4;
+    }
+    return '\0';
+}
+
+void I2C_Config(void) {
+    I2C_InitTypeDef I2C_InitStructure;
+
+    // Enable I2C clock
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
+
+    // I2C configuration
+    I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
+    I2C_InitStructure.I2C_DutyCycle = I2C_DutyCycle_2;
+    I2C_InitStructure.I2C_OwnAddress1 = 0x00;
+    I2C_InitStructure.I2C_Ack = I2C_Ack_Enable;
+    I2C_InitStructure.I2C_AcknowledgedAddress = I2C_AcknowledgedAddress_7bit;
+    I2C_InitStructure.I2C_ClockSpeed = 100000;
+    I2C_Init(I2C1, &I2C_InitStructure);
+
+    // Enable I2C
+    I2C_Cmd(I2C1, ENABLE);
+}
+
+void I2C_Write(uint8_t address, uint8_t data) {
+    // Send I2C start signal
+    I2C_GenerateSTART(I2C1, ENABLE);
+    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_MODE_SELECT));
+
+    // Send I2C address
+    I2C_Send7bitAddress(I2C1, address, I2C_Direction_Transmitter);
+    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_TRANSMITTER_MODE_SELECTED));
+
+    // Send data
+    I2C_SendData(I2C1, data);
+    while (!I2C_CheckEvent(I2C1, I2C_EVENT_MASTER_BYTE_TRANSMITTING));
+
+    // Send I2C stop signal
+    I2C_GenerateSTOP(I2C1, ENABLE);
+}
+
+void LCD_SendCommand(uint8_t cmd) {
+    // Send command to the LCD
+    I2C_Write(LCD_ADDRESS, cmd);
+    delay(5000);
+}
+
+void LCD_Init(void) {
+    // Initialize the LCD
+    delay(50000);  // Wait for LCD to power up
+
+    LCD_SendCommand(0x30);  // Function set
+    delay(5000);
+    LCD_SendCommand(0x30);  // Function set
+    delay(5000);
+    LCD_SendCommand(0x30);  // Function set
+    delay(5000);
+    LCD_SendCommand(0x20);  // Set to 4-bit mode
+    delay(5000);
+
+    // Configure the LCD
+    LCD_SendCommand(0x28);  // Function set: 4-bit, 2 line, 5x8 dots
+    LCD_SendCommand(0x08);  // Display off
+    LCD_SendCommand(0x01);  // Clear display
+    delay(5000);
+    LCD_SendCommand(0x06);  // Entry mode set: increment automatically, no display shift
+    LCD_SendCommand(0x0C);  // Display on, cursor off, blink off
+}
+
+void LCD_Print(char* message) {
+    while (*message) {
+        I2C_Write(LCD_ADDRESS, *message++);
+        delay(5000);
+    }
+}
+
+int main(void) {
+    // System initialization
+    SystemInit();
+    debug_init();
+
+    // GPIO configuration
+    GPIO_Config();
+
+    // I2C configuration
+    I2C_Config();
+
+    // LCD initialization
+    LCD_Init();
+
+    while (1) {
+        char key = readKeypad();
+        if (key) {
+            // Print the key pressed to the LCD
+            char message[2] = { key, '\0' };
+            LCD_Print(message);
+            LCD_Print("**Floor**");
         }
+        delay(100000);
     }
 }
 
-void move_elevator(Elevator *elevator) {
-    if (elevator->direction == UP) {
-        elevator->current_floor++;
-    } else if (elevator->direction == DOWN) {
-        elevator->current_floor--;
-    }
+```
 
-    if (elevator->current_floor == elevator->target_floor) {
-        elevator->direction = IDLE;
-        elevator->request = false;
-    }
-}
-
-int main() {
-    Elevator elevator;
-    initialize_elevator(&elevator);
-
-    // Simulate adding a request
-    add_request(&elevator, 5);
-
-    // Simulate the elevator operation
-    while (elevator.request) {
-        move_elevator(&elevator);
-        printf("Elevator at floor %d\n", elevator.current_floor);
-    }
-
-    printf("Elevator reached target floor %d.\n", elevator.current_floor);
-    return 0;
-}
-
-````
-
-
-## Conclusion
-
-By following the outlined steps and using the provided components, you can build a functional smart elevator controller. This project not only enhances your understanding of embedded systems and motor control but also contributes to the development of more efficient and user-friendly elevator systems.
-
-**Task 6 completed**
-
-</details>
+### Task 6 completed
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+<details>
 
+<summary><h3>Task 7: </h3> Demonstration of the project</summary>
+  
+# Circuit Connections
 
+![WhatsApp Image 2024-07-17 at 14 36 39_810e7109](https://github.com/user-attachments/assets/1166c37a-e3c0-49c8-a015-5e2cdbe958c1)
 
-
-
-
-
-
-
-
-
-
-
-
-                              
-
-
-
-
-
-
-
-
-
+#  Application Video
 
 
 
